@@ -1,7 +1,9 @@
 import "./Create.css";
 
+import { useEffect, useState } from "react";
+
 import { useFetch } from "../../hooks/useFetch";
-import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const Create = () => {
     const [title, setTitle] = useState("");
@@ -9,8 +11,9 @@ const Create = () => {
     const [ingredients, setIngredients] = useState([]);
     const [method, setMethod] = useState("");
     const [cookingTime, setCookingTime] = useState("");
+    const history = useHistory();
 
-    const { postData } = useFetch("http://localhost:3000/recipes", "POST");
+    const { postData, data } = useFetch("http://localhost:3000/recipes", "POST");
 
     const handleAdd = (e) => {
         e.preventDefault();
@@ -25,6 +28,15 @@ const Create = () => {
         e.preventDefault();
         postData({ title, ingredients, method, cookingTime: cookingTime + ' minutes' })
     }
+
+    // redirect the user when we get the data response
+    useEffect(() => {
+        if (data)
+            // history.push("/");
+            // here history.push is not working properly (reason can be the version of react-router-dom)
+            console.log(history)
+    }, [data, history]);
+
     return (
         <div className="create">
             <h4 className="page-title">Add a new recipe</h4>
