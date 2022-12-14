@@ -1,6 +1,7 @@
 import "./Home.css";
 
 import { Audio } from 'react-loader-spinner'
+import RecipeList from "../../components/RecipeList/RecipeList";
 import { useFetch } from "../../hooks/useFetch";
 
 const Home = () => {
@@ -13,11 +14,7 @@ const Home = () => {
                 color="#58249c"
             /></div>}
             {error && <div className="error">{error}</div>}
-            {recipes && recipes.map((recipe => (
-                <div key={recipe.id}>
-                    <h4>{recipe.title}</h4>
-                </div>
-            )))}
+            {recipes && <RecipeList recipes={recipes} />}
         </div>
     )
 }

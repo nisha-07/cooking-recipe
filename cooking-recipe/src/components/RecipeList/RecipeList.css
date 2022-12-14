@@ -1,0 +1,32 @@
+.recipe-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.recipe-card {
+    margin: 20px;
+    padding: 30px;
+    border: 1px solid #58249c;
+    border-radius: 2px;
+    max-width: 350px;
+    box-shadow: 3px 3px 3px 3px #58249c;
+}
+
+.recipe-card:hover {
+    transform: rotate(4deg);
+    translate: 12px; ;
+}
+
+.recipe-card a {
+    display: block;
+    border: 2px solid black;
+    border-radius: 4px;
+    text-decoration: none;
+    padding: 4px;
+    text-align: center;
+}
+
+.recipe-card a:hover {
+    transform: translateX(10px);
+}
