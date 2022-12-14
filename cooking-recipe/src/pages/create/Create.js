@@ -1,5 +1,6 @@
 import "./Create.css";
 
+import { useFetch } from "../../hooks/useFetch";
 import { useState } from "react";
 
 const Create = () => {
@@ -8,6 +9,8 @@ const Create = () => {
     const [ingredients, setIngredients] = useState([]);
     const [method, setMethod] = useState("");
     const [cookingTime, setCookingTime] = useState("");
+
+    const { postData } = useFetch("http://localhost:3000/recipes", "POST");
 
     const handleAdd = (e) => {
         e.preventDefault();
@@ -18,9 +21,9 @@ const Create = () => {
         }
         setNewIngredient("")
     }
-
     const handleSubmit = (e) => {
         e.preventDefault();
+        postData({ title, ingredients, method, cookingTime: cookingTime + ' minutes' })
     }
     return (
         <div className="create">
@@ -38,7 +41,7 @@ const Create = () => {
                         Recipe ingredients :
                     </span>
                     <div className="ingredients d-flex flex-direction-row">
-                        <input className="col-8" type="text" onChange={(e) => setNewIngredient(e.target.value)} value={newIngredient} required />
+                        <input className="col-8" type="text" onChange={(e) => setNewIngredient(e.target.value)} value={newIngredient} />
                         <button className="btn col-4" onClick={handleAdd}>Add</button>
                     </div>
                     <p>Added ingredients: {ingredients.map(ing => <em>{ing},</em>)}</p>
