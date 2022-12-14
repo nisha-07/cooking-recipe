@@ -13,7 +13,6 @@ const Search = () => {
     const url = "http://localhost:3000/recipes?q=" + query
 
     const { data, error, isLoading } = useFetch(url);
-    console.log(data)
 
     return (
         <div className="page-title">
@@ -25,6 +24,7 @@ const Search = () => {
                 /></div>}
             {error && <div className="error">{error}</div>}
             {data && <RecipeList recipes={data} />}
+            {data && !data.length && <em className="no-data-msg"> No recipes found with this search query</em>}
         </div>
     )
 }
