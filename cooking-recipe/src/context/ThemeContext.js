@@ -1,13 +1,29 @@
-import { createContext } from "react";
+import { createContext, useReducer } from "react";
 
 export const ThemeContext = createContext();
 
+//  to update the states
+const themeReducer = (state, action) => {
+    switch (action.type) {
+        case "CHANGE_COLOR":
+            return { ...state, color: action.payload }
+        default:
+            return state
+    }
+}
+
 const ThemeProvider = ({ children }) => {
 
-    // custom logic
+    const [state, dispatch] = useReducer(themeReducer, {
+        color: "#58249c",
+    })
+
+    const changeColor = (color) => {
+        dispatch({ type: "CHANGE_COLOR", payload: color })
+    }
 
     return (
-        <ThemeContext.Provider value={{ color: "#58249c" }}>
+        <ThemeContext.Provider value={{ ...state, changeColor }}>
             {children}
         </ThemeContext.Provider>
     )
