@@ -12,6 +12,9 @@
     max-width: 350px;
     box-shadow: 3px 3px 3px 3px #58249c;
 }
+.recipe-card .dark {
+    color: white;
+}
 
 .recipe-card:hover {
     transform: rotate(4deg);

@@ -8,10 +8,12 @@ import Navbar from './components/Navbar/Navbar';
 import Recipe from './pages/recipe/Recipe';
 import Search from './pages/search/Search';
 import ThemeSelector from './components/ThemeSelector/ThemeSelector';
+import useTheme from './hooks/useTheme';
 
 function App() {
+  const { mode } = useTheme()
   return (
-    <div>
+    <div className={mode}>
       <BrowserRouter>
         {/* this navbar component will be inside the browser router bcz we're using Link tag inside it */}
         <Navbar />
