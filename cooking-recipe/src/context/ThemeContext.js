@@ -7,7 +7,7 @@ const ThemeProvider = ({ children }) => {
     // custom logic
 
     return (
-        <ThemeContext.Provider value={{ color: "purple" }}>
+        <ThemeContext.Provider value={{ color: "#58249c" }}>
             {children}
         </ThemeContext.Provider>
     )
