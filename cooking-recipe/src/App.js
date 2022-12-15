@@ -7,6 +7,7 @@ import Home from './pages/home/Home';
 import Navbar from './components/Navbar/Navbar';
 import Recipe from './pages/recipe/Recipe';
 import Search from './pages/search/Search';
+import ThemeSelector from './components/ThemeSelector/ThemeSelector';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <BrowserRouter>
         {/* this navbar component will be inside the browser router bcz we're using Link tag inside it */}
         <Navbar />
+        <ThemeSelector />
         <Switch>
           <Route exact path="/">
             <Home />
