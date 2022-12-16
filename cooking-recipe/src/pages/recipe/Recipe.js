@@ -1,10 +1,10 @@
 import "./Recipe.css";
 
-import { Audio } from "react-loader-spinner";
-
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+
+import { Audio } from "react-loader-spinner";
 import { projectFirebasestore } from "../../firebase/config";
+import { useParams } from "react-router-dom";
 
 const Recipe = () => {
     const { id } = useParams()
@@ -28,6 +28,12 @@ const Recipe = () => {
         })
 
     }, [])
+
+    // this is to update the recipe in firestire data (not on UI)
+    // projectFirebasestore.collection("recipes").doc(id).update({
+    //     title: "Something new title"
+    // })
+
 
     return (
         <div>

@@ -15,10 +15,12 @@ const Home = () => {
     useEffect(() => {
         setIsLoading(true)
 
-        projectFirebasestore.collection("recipes").get().then((snapshot) => {
-            console.log(snapshot.docs);
+        // projectFirebasestore.collection("recipes").get().then((snapshot)
+        // this will not update the collections for UI (if some recipes are deleted)
+
+        const unsub = projectFirebasestore.collection("recipes").onSnapshot((snapshot) => {
             if (snapshot.empty)
-                setError("No data found")
+                setError("No recipes found for project")
             setIsLoading(false);
             let results = [];
             snapshot.forEach((doc) => {
@@ -26,9 +28,11 @@ const Home = () => {
             })
             setData(results);
             setIsLoading(false);
-        }).catch(err => { setError(err); })
-        console.log(data, "DATA")
-    }, [])
+        }, (err) => setError(err.message))
+
+        return () => unsub()
+    },
+        [])
 
     return (
         <div className="home">

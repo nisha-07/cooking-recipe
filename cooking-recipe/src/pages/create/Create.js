@@ -1,10 +1,8 @@
 import "./Create.css";
 
-import { useEffect, useState } from "react";
-
 import { projectFirebasestore } from "../../firebase/config";
-import { useFetch } from "../../hooks/useFetch";
 import { useHistory } from "react-router-dom";
+import { useState } from "react";
 
 const Create = () => {
     const [title, setTitle] = useState("");

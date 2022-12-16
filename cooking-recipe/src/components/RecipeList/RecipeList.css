@@ -5,6 +5,7 @@
 }
 
 .recipe-card {
+    position: relative;
     margin: 20px;
     padding: 30px;
     border: 1px solid #58249c;
