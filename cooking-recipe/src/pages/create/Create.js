@@ -2,6 +2,7 @@ import "./Create.css";
 
 import { useEffect, useState } from "react";
 
+import { projectFirebasestore } from "../../firebase/config";
 import { useFetch } from "../../hooks/useFetch";
 import { useHistory } from "react-router-dom";
 
@@ -13,7 +14,6 @@ const Create = () => {
     const [cookingTime, setCookingTime] = useState("");
     const history = useHistory();
 
-    const { postData, data } = useFetch("http://localhost:3000/recipes", "POST");
 
     const handleAdd = (e) => {
         e.preventDefault();
@@ -24,18 +24,21 @@ const Create = () => {
         }
         setNewIngredient("")
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        postData({ title, ingredients, method, cookingTime: cookingTime + ' minutes' })
+        const doc = { title, ingredients, method, cookingTime: cookingTime + ' minutes' }
+
+        try {
+            // we are using await here because we want to navigate to home page after completion of adding a new recipe
+            await projectFirebasestore.collection("recipes").add(doc)
+            history.push("/")
+        }
+        catch (err) {
+            console.log(err)
+        }
     }
 
-    // redirect the user when we get the data response
-    useEffect(() => {
-        if (data)
-            // history.push("/");
-            // here history.push is not working properly (reason can be the version of react-router-dom)
-            console.log(history)
-    }, [data, history]);
+
 
     return (
         <div className="create">
